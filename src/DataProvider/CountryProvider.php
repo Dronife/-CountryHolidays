@@ -17,11 +17,7 @@ class CountryProvider implements CollectionDataProviderInterface, RestrictedData
 
     public function getCollection(string $resourceClass, string $operationName = null, array $context = []): iterable
     {
-        return array_map(function($object){
-            return $object['fullName'];
-        }, $this->country->getCountries());
-//        return $this->country->getCountries();
-
+        return $this->country->getCountries();
     }
 
     public function supports(string $resourceClass, string $operationName = null, array $context = []): bool

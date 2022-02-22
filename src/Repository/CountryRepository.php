@@ -4,7 +4,9 @@ namespace App\Repository;
 
 use App\Entity\Country;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 /**
  * @method Country|null find($id, $lockMode = null, $lockVersion = null)
@@ -17,6 +19,10 @@ class CountryRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Country::class);
+    }
+
+    public function getCount(){
+        return $this->createQueryBuilder('a')->select('count(a.id)')->getQuery()->getSingleScalarResult();
     }
 
     // /**
